@@ -10,13 +10,13 @@ AppsKey::Send {PgDn}
 ;Ctrl & SC02d::Send !{f4}
 ;RAlt::Send {PgUp}
 
-;CapsLock::Send, {blind}{-}
+;CapsLock::Send, ^c
 ;^CapsLock::Send, ^v
 ;^SC02e::Send, ^c
 ^SC02f::Send, ^v
 ^SC02e::Send, ^c
 
-*SC010::Send {blind}{;}
+*SC010::Send {blind}{'}
 *SC011::Send {blind}{,}
 *SC012::Send {blind}{.}
 *SC013::Send {blind}{p}
@@ -42,6 +42,12 @@ AppsKey::Send {PgDn}
 *SC026::Send {blind}{n}
 *SC027::Send {blind}{s}
 *SC028::Send {blind}{'}
+^!*SC028::
+  Send {-}
+  return
+^!*+SC028::
+  Send {_}
+  return
 
 *SC02c::Send {blind}{z}
 *SC02d::Send {blind}{q}
@@ -64,56 +70,12 @@ AppsKey::Send {PgDn}
 ;<^>*+SC030::Send {X}
 ;<^>*SC030::Send {x}
 
-*SC030::Send {blind}{f} 
+*SC030::Send {blind}{x} 
 *SC031::Send {blind}{b}
 *SC032::Send {blind}{m}
 *SC033::Send {blind}{w}
 *SC034::Send {blind}{v}  
 *SC035::Send {blind}{/}
 
-;*SC0c::Send {blind}{-}
-;*SC0d::Send {blind}{=}
-
-#IfWinActive ahk_class NotebookFrame
-  ; Ctrl + v
-  Enter::Send {blind}{shift down}{enter}{shift up} 
-  Shift & Enter::Send {enter}
-  ;Ctrl & SC034::Send {blind{Ctrl Down}{shift down}{enter}{shift up}{Ctrl Up}
-  return
-#IfWinActive
-
-
-#IfWinActive ahk_class Notepad++
-MButton::Send {Lbutton}{Ctrl Down}{Alt Down}{b}{Alt Up}{Ctrl Up}
-;Doesn't work I have no idea why
-;~LButton::
-;if (A_PriorHotkey <> "~LButton" or A_TimeSincePriorHotkey > 400)
-;{
-;    KeyWait, LButton
-;    return
-;}else{
-;    Send {Ctrl Down}{Alt Down}{b}{Alt Up}{Ctrl Up}
-;}
-#IfWinActive
-
-
-;#IfWinActive ahk_class SunAwtFrame
-;~LButton::
-;if (A_PriorHotkey <> "~LButton" or A_TimeSincePriorHotkey > 400)
-;{
-;    KeyWait, LButton
-;    return
-;}else{
-;    Send {Ctrl Down}{w}{Ctrl Up}
-;}
-;#IfWinActive
-
-;Return::
-;  WinGetClass, class, A
-;  MsgBox, The active window's class is "%class%".
-;  return
-  
-#IfWinActive ahk_class ConsoleWindowClass
-  AppsKey::Send {Alt Down}{Space}{e}{l}{Alt Up}{PgDn}
-  RAlt::Send {Alt Down}{Space}{e}{l}{Alt Up}{PgUp}
-#IfWinActive
+*SC0c::Send {blind}{-}
+*SC0d::Send {blind}{=}
